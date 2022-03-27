@@ -196,10 +196,12 @@ async def async_get_state(config) -> dict:
                 if event["status"]["type"]["state"].lower() in ['pre', 'post']: # could use status.completed == true as well
                     values["last_play"] = None
                     values["inning"] = None
+                    values["inning_detail"] = None
                     values["team_win_probability"] = None
                     values["opponent_win_probability"] = None
                 else:
                     values["inning"] = event["status"]["period"]
+                    values["inning_detail"] = event["status"]["type"]["detail"]
                     values["last_play"] = event["competitions"][0]["situation"]["lastPlay"]["text"]
                     if event["competitions"][0]["competitors"][team_index]["homeAway"] == "home":
                         try:
@@ -293,6 +295,7 @@ async def async_clear_states(config) -> dict:
         "date": None,
         "kickoff_in": None,
         "inning": None,
+        "inning_detail": None,
         "venue": None,
         "location": None,
         "tv_network": None,
