@@ -78,6 +78,12 @@ class MLBScoresSensor(CoordinatorEntity):
         self._kickoff_in = None
         self._inning = None
         self._inning_detail = None
+        self._balls = None,
+        self._strikes = None,
+        self._outs = None,
+        self._on_first = None,
+        self._on_second = None,
+        self._on_third = None,
         self._venue = None
         self._location = None
         self._tv_network = None
@@ -146,6 +152,12 @@ class MLBScoresSensor(CoordinatorEntity):
         attrs["kickoff_in"] = self.coordinator.data["kickoff_in"]
         attrs["inning"] = self.coordinator.data["inning"]
         attrs["inning_detail"] = self.coordinator.data["inning_detail"]
+        attrs["balls"] = self.coordinator.data["balls"]
+        attrs["strikes"] = self.coordinator.data["strikes"]
+        attrs["outs"] = self.coordinator.data["outs"]
+        attrs["on_first"] = self.coordinator.data["on_first"]
+        attrs["on_second"] = self.coordinator.data["on_second"]
+        attrs["on_third"] = self.coordinator.data["on_third"]
         attrs["venue"] = self.coordinator.data["venue"]
         attrs["location"] = self.coordinator.data["location"]
         attrs["tv_network"] = self.coordinator.data["tv_network"]
