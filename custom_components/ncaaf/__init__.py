@@ -166,6 +166,7 @@ async def async_get_state(config) -> dict:
                 oppo_index = abs((team_index-1))
                 _LOGGER.debug("Finding state.")
                 values["state"] = event["status"]["type"]["state"].upper()
+                _LOGGER.debug("State: %s" % (values["state"]))
                 _LOGGER.debug("Finding date.")
                 values["date"] = event["date"]
                 _LOGGER.debug("Finding kickoff.")
@@ -175,7 +176,10 @@ async def async_get_state(config) -> dict:
                 _LOGGER.debug("Finding location.")
                 values["location"] = "%s, %s" % (event["competitions"][0]["venue"]["address"]["city"], event["competitions"][0]["venue"]["address"]["state"])
                 _LOGGER.debug("Finding tv network.")
-                values["tv_network"] = event["competitions"][0]["broadcasts"][0]["names"][0]
+                try:
+                    values["tv_network"] = event["competitions"][0]["broadcasts"][0]["names"][0]
+                except:
+                    values["tv_network"] = None
                 if event["status"]["type"]["state"].lower() in ['pre']: # odds only exist pre-game
                     values["odds"] = event["competitions"][0]["odds"][0]["details"]
                     values["overunder"] = event["competitions"][0]["odds"][0]["overUnder"]
