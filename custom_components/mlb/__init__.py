@@ -194,25 +194,13 @@ async def async_get_state(config) -> dict:
                 _LOGGER.debug("Odds: %s" % (values["odds"]))
                 _LOGGER.debug("OverUnder: %s" % (values["overunder"]))
                 if event["status"]["type"]["state"].lower() in ['pre', 'post']: # could use status.completed == true as well
-                    values["possession"] = None
                     values["last_play"] = None
-                    values["down_distance_text"] = None
-                    values["team_timeouts"] = 3
-                    values["opponent_timeouts"] = 3
                     values["inning"] = None
                     values["team_win_probability"] = None
                     values["opponent_win_probability"] = None
                 else:
                     values["inning"] = event["status"]["period"]
                     values["last_play"] = event["competitions"][0]["situation"]["lastPlay"]["text"]
-                    try:
-                        values["down_distance_text"] = event["competitions"][0]["situation"]["downDistanceText"]
-                    except:
-                        values["down_distance_text"] = None
-                    try:
-                        values["possession"] = event["competitions"][0]["situation"]["possession"]
-                    except:
-                        values["possession"] = None
                     if event["competitions"][0]["competitors"][team_index]["homeAway"] == "home":
                         try:
                             values["team_win_probability"] = event["competitions"][0]["situation"]["lastPlay"]["probability"]["homeWinPercentage"]
@@ -236,14 +224,8 @@ async def async_get_state(config) -> dict:
                     values["team_record"] = None
                 values["team_homeaway"] = event["competitions"][0]["competitors"][team_index]["homeAway"]
                 values["team_logo"] = event["competitions"][0]["competitors"][team_index]["team"]["logo"]
-                try:
-                    values["team_colors"] = [''.join(('#',event["competitions"][0]["competitors"][team_index]["team"]["color"])), 
+                values["team_colors"] = [''.join(('#',event["competitions"][0]["competitors"][team_index]["team"]["color"])), 
                                          ''.join(('#',event["competitions"][0]["competitors"][team_index]["team"]["alternateColor"]))]
-                except:
-                    if team_id == 'NFC':
-                        values["team_colors"] = ['#013369','#013369']
-                    if team_id == 'AFC':
-                        values["team_colors"] = ['#D50A0A','#D50A0A']
                 values["team_score"] = event["competitions"][0]["competitors"][team_index]["score"]                
                 values["opponent_abbr"] = event["competitions"][0]["competitors"][oppo_index]["team"]["abbreviation"]
                 values["opponent_id"] = event["competitions"][0]["competitors"][oppo_index]["team"]["id"]
@@ -254,14 +236,8 @@ async def async_get_state(config) -> dict:
                     values["opponent_record"] = None
                 values["opponent_homeaway"] = event["competitions"][0]["competitors"][oppo_index]["homeAway"]
                 values["opponent_logo"] = event["competitions"][0]["competitors"][oppo_index]["team"]["logo"]
-                try:
-                    values["opponent_colors"] = [''.join(('#',event["competitions"][0]["competitors"][team_index]["team"]["color"])), 
+                values["opponent_colors"] = [''.join(('#',event["competitions"][0]["competitors"][team_index]["team"]["color"])), 
                                          ''.join(('#',event["competitions"][0]["competitors"][team_index]["team"]["alternateColor"]))]
-                except:
-                    if team_id == 'AFC':
-                        values["opponent_colors"] = ['#013369','#013369']
-                    if team_id == 'NFC':
-                        values["opponent_colors"] = ['#D50A0A','#D50A0A']
                 values["opponent_score"] = event["competitions"][0]["competitors"][oppo_index]["score"]
                 values["last_update"] = arrow.now().format(arrow.FORMAT_W3C)
                 values["private_fast_refresh"] = False
@@ -323,8 +299,6 @@ async def async_clear_states(config) -> dict:
         "odds": None,
         "overunder": None,
         "last_play": None,
-        "down_distance_text": None,
-        "possession": None,
         "team_id": None,
         "team_record": None,
         "team_homeaway": None,
