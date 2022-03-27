@@ -2,10 +2,10 @@
     "domain": "ncaaf",
     "name": "NCAAF",
     "version": "0.1",
-    "documentation": "https://github.com/zacs/ha_nfl",
-    "issue_tracker": "https://github.com/zacs/ha_nfl/issues",
+    "documentation": "https://github.com/jazakrzewski/ha-ncaaf",
+    "issue_tracker": "https://github.com/jazakrzewski/ha-ncaaf/issues",
     "dependencies": [],
-    "codeowners": ["@zacs"],
+    "codeowners": ["@jazakrzewski"],
     "config_flow": true,
     "requirements": ["arrow"],
     "iot_class": "cloud_polling"
