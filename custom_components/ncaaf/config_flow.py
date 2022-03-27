@@ -17,6 +17,7 @@ from .const import (
     CONF_TEAM_ID,
     DEFAULT_NAME,
     DEFAULT_TIMEOUT,
+    DEFAULT_TEAM,
     DOMAIN,
     USER_AGENT,
 )
@@ -81,7 +82,7 @@ class NCAAFScoresFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_user(self, user_input={}):
         """Handle a flow initialized by the user."""
         self._errors = {}
-        self._team_list = await _get_team_list(self)
+        #self._team_list = await _get_team_list(self)
 
         if user_input is not None:
             self._data.update(user_input)
