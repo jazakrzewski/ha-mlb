@@ -7,8 +7,8 @@
           "team_id": "Team Acronym",
           "timeout": "Update Timeout (in seconds)"
         },
-        "description": "You can find your 2 or 3-letter acronym on the ESPN NFL page's banner, at the top score strip.",
-        "title": "NFL"
+        "description": "You can find your 2, 3 or 4-letter acronym on the ESPN NCAAF page's banner, at the top score strip.",
+        "title": "NCAAF"
       }
     }
   },
@@ -20,8 +20,8 @@
           "team_id": "Team Acronym",
           "timeout": "Update Timeout (in seconds)"
         },
-        "description": "You can find your 2 or 3-letter acronym on the ESPN NFL page's banner, at the top score strip.",
-        "title": "NFL"
+        "description": "You can find your 2, 3 or 4-letter acronym on the ESPN NCAAF page's banner, at the top score strip.",
+        "title": "NCAAF"
       }
     }
   }
