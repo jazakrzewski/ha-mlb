@@ -199,13 +199,11 @@ async def async_get_state(config) -> dict:
                     values["down_distance_text"] = None
                     values["team_timeouts"] = 3
                     values["opponent_timeouts"] = 3
-                    values["quarter"] = None
-                    values["clock"] = None
+                    values["inning"] = None
                     values["team_win_probability"] = None
                     values["opponent_win_probability"] = None
                 else:
-                    values["quarter"] = event["status"]["period"]
-                    values["clock"] = event["status"]["displayClock"]
+                    values["inning"] = event["status"]["period"]
                     values["last_play"] = event["competitions"][0]["situation"]["lastPlay"]["text"]
                     try:
                         values["down_distance_text"] = event["competitions"][0]["situation"]["downDistanceText"]
@@ -318,8 +316,7 @@ async def async_clear_states(config) -> dict:
     values = {
         "date": None,
         "kickoff_in": None,
-        "quarter": None,
-        "clock": None,
+        "inning": None,
         "venue": None,
         "location": None,
         "tv_network": None,
