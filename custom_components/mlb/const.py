@@ -7,7 +7,7 @@ CONF_TIMEOUT = "timeout"
 CONF_TEAM_ID = "team_id"
 
 # Defaults
-DEFAULT_ICON = "mdi:football"
+DEFAULT_ICON = "mdi:baseball"
 DEFAULT_NAME = "MLB"
 DEFAULT_TEAM = "DET"
 DEFAULT_TIMEOUT = 120
