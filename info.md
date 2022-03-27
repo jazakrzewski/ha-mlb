@@ -1,4 +1,4 @@
-# NCAAF Score API
+# MLB Score API
 
 Beta version in testing
 

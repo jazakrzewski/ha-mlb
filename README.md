@@ -1,6 +1,6 @@
-# NCAAF game data in Home Assistant
+# MLB game data in Home Assistant
 
-This integration fetches data for a NCAAF team's current/future game, and creates a sensor with attributes for the details of the game. 
+This integration fetches data for a MLB team's current/future game, and creates a sensor with attributes for the details of the game. 
 
 The integration is a shameless fork of the excellent [HA NFL](https://github.com/zacs/ha-nfl) custom component by @zacs which was a fork from the [NWS alerts](https://github.com/finity69x2/nws_alerts) custom component by @finity69x2. Thank you both for the starting place!
 

@@ -1,4 +1,4 @@
-"""Adds config flow for NCAAF."""
+"""Adds config flow for MLB."""
 from __future__ import annotations
 
 import logging
@@ -59,8 +59,8 @@ def _get_schema(hass: Any, user_input: list, default_dict: list) -> Any:
 
 
 @config_entries.HANDLERS.register(DOMAIN)
-class NCAAFScoresFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
-    """Config flow for NCAAF."""
+class MLBScoresFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
+    """Config flow for MLB."""
 
     VERSION = 2
     CONNECTION_CLASS = config_entries.CONN_CLASS_CLOUD_POLL
@@ -108,11 +108,11 @@ class NCAAFScoresFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
     @staticmethod
     @callback
     def async_get_options_flow(config_entry):
-        return NCAAFScoresOptionsFlow(config_entry)
+        return MLBScoresOptionsFlow(config_entry)
 
 
-class NCAAFScoresOptionsFlow(config_entries.OptionsFlow):
-    """Options flow for NCAAF."""
+class MLBScoresOptionsFlow(config_entries.OptionsFlow):
+    """Options flow for MLB."""
 
     def __init__(self, config_entry):
         """Initialize."""
