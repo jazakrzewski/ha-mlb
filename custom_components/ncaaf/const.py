@@ -9,6 +9,7 @@ CONF_TEAM_ID = "team_id"
 # Defaults
 DEFAULT_ICON = "mdi:football"
 DEFAULT_NAME = "NCAAF"
+DEFAULT_TEAM = "MICH"
 DEFAULT_TIMEOUT = 120
 
 # Misc

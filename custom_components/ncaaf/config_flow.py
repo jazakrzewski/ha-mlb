@@ -46,15 +46,15 @@ def _get_schema(hass: Any, user_input: list, default_dict: list) -> Any:
     )
 
 
-async def _get_team_list(self):
-    """Return list of team acronyms"""
+# async def _get_team_list(self):
+#     """Return list of team acronyms"""
 
-    team_list = [
-        'MICH'
-    ]
+#     team_list = [
+#         'MICH'
+#     ]
     
-    _LOGGER.debug("Team list: %s", team_list)
-    return team_list
+#     _LOGGER.debug("Team list: %s", team_list)
+#     return team_list
 
 
 @config_entries.HANDLERS.register(DOMAIN)
@@ -95,7 +95,7 @@ class NCAAFScoresFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         defaults = {
             CONF_NAME: DEFAULT_NAME,
             CONF_TIMEOUT: DEFAULT_TIMEOUT,
-            CONF_TEAM_ID: self._team_list,
+            CONF_TEAM_ID: DEFAULT_TEAM,
         }
 
         return self.async_show_form(
