@@ -95,7 +95,6 @@ class MLBScoresSensor(CoordinatorEntity):
         self._team_colors = None
         self._team_score = None
         self._team_win_probability = None
-        self._team_timeouts = None
         self._opponent_abbr = None
         self._opponent_id = None
         self._opponent_name = None
@@ -105,7 +104,6 @@ class MLBScoresSensor(CoordinatorEntity):
         self._opponent_colors = None
         self._opponent_score = None
         self._opponent_win_probability = None
-        self._opponent_timeouts = None
         self._last_update = None
         self._team_id = entry.data[CONF_TEAM_ID]
         self.coordinator = hass.data[DOMAIN][entry.entry_id][COORDINATOR]
@@ -167,7 +165,6 @@ class MLBScoresSensor(CoordinatorEntity):
         attrs["team_colors"] = self.coordinator.data["team_colors"]
         attrs["team_score"] = self.coordinator.data["team_score"]
         attrs["team_win_probability"] = self.coordinator.data["team_win_probability"]
-        attrs["team_timeouts"] = self.coordinator.data["team_timeouts"]
         attrs["opponent_abbr"] = self.coordinator.data["opponent_abbr"]
         attrs["opponent_id"] = self.coordinator.data["opponent_id"]
         attrs["opponent_name"] = self.coordinator.data["opponent_name"]
@@ -177,7 +174,6 @@ class MLBScoresSensor(CoordinatorEntity):
         attrs["opponent_colors"] = self.coordinator.data["opponent_colors"]
         attrs["opponent_score"] = self.coordinator.data["opponent_score"]
         attrs["opponent_win_probability"] = self.coordinator.data["opponent_win_probability"]
-        attrs["opponent_timeouts"] = self.coordinator.data["opponent_timeouts"]
         attrs["last_update"] = self.coordinator.data["last_update"]
 
         return attrs

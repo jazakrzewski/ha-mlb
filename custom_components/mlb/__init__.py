@@ -216,8 +216,6 @@ async def async_get_state(config) -> dict:
                     except:
                         values["possession"] = None
                     if event["competitions"][0]["competitors"][team_index]["homeAway"] == "home":
-                        values["team_timeouts"] = event["competitions"][0]["situation"]["homeTimeouts"]
-                        values["opponent_timeouts"] = event["competitions"][0]["situation"]["awayTimeouts"]
                         try:
                             values["team_win_probability"] = event["competitions"][0]["situation"]["lastPlay"]["probability"]["homeWinPercentage"]
                             values["opponent_win_probability"] = event["competitions"][0]["situation"]["lastPlay"]["probability"]["awayWinPercentage"]
@@ -225,8 +223,6 @@ async def async_get_state(config) -> dict:
                             values["team_win_probability"] = None
                             values["opponent_win_probability"] = None
                     else:
-                        values["team_timeouts"] = event["competitions"][0]["situation"]["awayTimeouts"]
-                        values["opponent_timeouts"] = event["competitions"][0]["situation"]["homeTimeouts"]
                         try:
                             values["team_win_probability"] = event["competitions"][0]["situation"]["lastPlay"]["probability"]["awayWinPercentage"]
                             values["opponent_win_probability"] = event["competitions"][0]["situation"]["lastPlay"]["probability"]["homeWinPercentage"]
@@ -338,7 +334,6 @@ async def async_clear_states(config) -> dict:
         "team_colors": None,
         "team_score": None,
         "team_win_probability": None,
-        "team_timeouts": None,
         "opponent_abbr": None,
         "opponent_id": None,
         "opponent_name": None,
@@ -348,7 +343,6 @@ async def async_clear_states(config) -> dict:
         "opponent_colors": None,
         "opponent_score": None,
         "opponent_win_probability": None,
-        "opponent_timeouts": None,
         "last_update": None,
         "private_fast_refresh": False
     }
