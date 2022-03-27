@@ -164,28 +164,35 @@ async def async_get_state(config) -> dict:
                 found_team = True
                 team_index = 0 if event["competitions"][0]["competitors"][0]["team"]["abbreviation"] == team_id else 1
                 oppo_index = abs((team_index-1))
-                _LOGGER.debug("Finding state.")
                 values["state"] = event["status"]["type"]["state"].upper()
                 _LOGGER.debug("State: %s" % (values["state"]))
-                _LOGGER.debug("Finding date.")
                 values["date"] = event["date"]
-                _LOGGER.debug("Finding kickoff.")
+                _LOGGER.debug("Date: %s" % (values["date"]))
                 values["kickoff_in"] = arrow.get(event["date"]).humanize()
-                _LOGGER.debug("Finding venue.")
+                _LOGGER.debug("Kickoff In: %s" % (values["kickoff_in"]))
                 values["venue"] = event["competitions"][0]["venue"]["fullName"]
-                _LOGGER.debug("Finding location.")
+                _LOGGER.debug("Venue: %s" % (values["venue"]))
                 values["location"] = "%s, %s" % (event["competitions"][0]["venue"]["address"]["city"], event["competitions"][0]["venue"]["address"]["state"])
-                _LOGGER.debug("Finding tv network.")
+                _LOGGER.debug("Location: %s" % (values["location"]))
                 try:
                     values["tv_network"] = event["competitions"][0]["broadcasts"][0]["names"][0]
                 except:
                     values["tv_network"] = None
+                _LOGGER.debug("TV Network: %s" % (values["tv_network"]))
                 if event["status"]["type"]["state"].lower() in ['pre']: # odds only exist pre-game
-                    values["odds"] = event["competitions"][0]["odds"][0]["details"]
-                    values["overunder"] = event["competitions"][0]["odds"][0]["overUnder"]
+                    try:
+                        values["odds"] = event["competitions"][0]["odds"][0]["details"]
+                    except:
+                        values["odds"] = None
+                    try:
+                        values["overunder"] = event["competitions"][0]["odds"][0]["overUnder"]
+                    except:
+                        values["overunder"] = None
                 else:
                     values["odds"] = None
                     values["overunder"] = None
+                _LOGGER.debug("Odds: %s" % (values["odds"]))
+                _LOGGER.debug("OverUnder: %s" % (values["overunder"]))
                 if event["status"]["type"]["state"].lower() in ['pre', 'post']: # could use status.completed == true as well
                     values["possession"] = None
                     values["last_play"] = None
