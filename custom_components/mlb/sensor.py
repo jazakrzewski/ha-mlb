@@ -75,7 +75,7 @@ class MLBScoresSensor(CoordinatorEntity):
         self._icon = DEFAULT_ICON
         self._state = "PRE"
         self._date = None
-        self._kickoff_in = None
+        self._first_pitch_in = None
         self._inning = None
         self._inning_detail = None
         self._balls = None,
@@ -149,7 +149,7 @@ class MLBScoresSensor(CoordinatorEntity):
 
         attrs[ATTR_ATTRIBUTION] = ATTRIBUTION
         attrs["date"] = self.coordinator.data["date"]
-        attrs["kickoff_in"] = self.coordinator.data["kickoff_in"]
+        attrs["first_pitch_in"] = self.coordinator.data["first_pitch_in"]
         attrs["inning"] = self.coordinator.data["inning"]
         attrs["inning_detail"] = self.coordinator.data["inning_detail"]
         attrs["balls"] = self.coordinator.data["balls"]

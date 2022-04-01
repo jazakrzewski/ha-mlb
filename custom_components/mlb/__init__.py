@@ -168,8 +168,8 @@ async def async_get_state(config) -> dict:
                 _LOGGER.debug("State: %s" % (values["state"]))
                 values["date"] = event["date"]
                 _LOGGER.debug("Date: %s" % (values["date"]))
-                values["kickoff_in"] = arrow.get(event["date"]).humanize()
-                _LOGGER.debug("Kickoff In: %s" % (values["kickoff_in"]))
+                values["first_pitch_in"] = arrow.get(event["date"]).humanize()
+                _LOGGER.debug("First Pitch In: %s" % (values["first_pitch_in"]))
                 values["venue"] = event["competitions"][0]["venue"]["fullName"]
                 _LOGGER.debug("Venue: %s" % (values["venue"]))
                 values["location"] = "%s, %s" % (event["competitions"][0]["venue"]["address"]["city"], event["competitions"][0]["venue"]["address"]["state"])
@@ -305,7 +305,7 @@ async def async_clear_states(config) -> dict:
     # Reset values
     values = {
         "date": None,
-        "kickoff_in": None,
+        "first_pitch_in": None,
         "inning": None,
         "inning_detail": None,
         "balls" : None,
