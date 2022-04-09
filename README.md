@@ -7,12 +7,11 @@ The integration is a shameless fork of the excellent [HA NFL](https://github.com
 ## Sensor Data
 
 ### State
-The sensor is pretty simple: the main state is `PRE`, `IN`, `POST`, `BYE` or `NOT_FOUND`, but there are attributes for pretty much all aspects of the game, when available. State definitions are as you'd expect:
+The sensor is pretty simple: the main state is `PRE`, `IN`, `POST`, or `NOT_FOUND`, but there are attributes for pretty much all aspects of the game, when available. State definitions are as you'd expect:
 - `PRE`: The game is in pre-game state. This happens on the first day of the game week, which seems to be Tuesday evenings around midnight Eastern time (once all the games through the Monday Night Football game are wrapped up). 
 - `IN`: The game is in progress.
 - `POST`: The game has completed. 
-- `BYE`: Your given team has a bye week this week. Note that attributes available are limited in this case (only abreviation, name, logo, and last updated time will be available). 
-- `NOT_FOUND`: There is no game found for your team, nor is there a bye. This should only happen at the end of the season, and once your team is eliminated from postseason play. 
+- `NOT_FOUND`: There is no game found for your team.
 
 ### Attributes
 The attributes available will change based on the sensor's state, a small number are always available (team abbreviation, team name, and logo), but otherwise the attributes only populate when in the current state. The table below lists which attributes are available in which states. 
@@ -20,17 +19,21 @@ The attributes available will change based on the sensor's state, a small number
 | Name | Value | Relevant States |
 | --- | --- | --- |
 | `date` | Date and time of the game | `PRE` `IN` `POST` |
-| `kickoff_in` | Human-readable string for how far away the game is (eg. "in 30 minutes" or "tomorrow") |  `PRE` `IN` `POST` |
-| `quarter` | The current quarter of gameplay | `IN` |
-| `clock` | The clock value within the quarter (should never be higher than 15:00) | `IN` |
+| `first_pitch_in` | Human-readable string for how far away the game is (eg. "in 30 minutes" or "tomorrow") |  `PRE` `IN` `POST` |
+| `inning` | The current inning of gameplay | `IN` |
+| `inning_detail` | The current inning of gameplay with top/bottom | `IN` |
+| `balls` | Current ball count | `IN` |
+| `strikes` | Current strike count | `IN` |
+| `outs` | Current out count | `IN` |
+| `on_first` | True if runner on first | `IN` |
+| `on_second` | True if runner on second | `IN` |
+| `on_third` | True if runner on third | `IN` |
 | `venue` | The name of the stadium where the game is being played (eg. "Arrowhead Stadium") | `PRE` `IN` `POST` |
 | `location` | The city and state where the game is being played (eg. "Pittsburgh, PA") | `PRE` `IN` `POST` |
-| `tv_network` | The TV network where you can watch the game (eg. "NBC" or "NFL"). Note that if there is a national feed, it will be listed here, otherwise the local affiliate will be listed. | `PRE` `IN` `POST` |
+| `tv_network` | The TV network where you can watch the game (eg. "NBC" or "ESPN"). Note that if there is a national feed, it will be listed here, otherwise the local affiliate will be listed. | `PRE` `IN` `POST` |
 | `odds` | The betting odds for the game (eg. "PIT -5.0") | `PRE` |
 | `overunder` | The over/under betting line for the total points scored in the game (eg. "42.5"). | `PRE` |
-| `possession` | The ID of the team in possession of the ball. This will correlate to `team_id` or `opponent_id` below. Note that this value will be null in between posessions (after a score, etc). | `IN` |
 | `last_play` | Sentence describing the most recent play, usually including the participants from both offense and defense, and the resulting yards. Note this can be null on posession changes or in between quarters. | `IN` |
-| `down_distance_text` | String for the down and yards to go (eg. "2nd and 7"). | `IN` |
 | `team_abbr` | The abbreviation for your team (ie. `SEA` for the Seahawks). | `PRE` `IN` `POST` `BYE` |
 | `team_id` | A numeric ID for your team, used to match `possession` above. | `PRE` `IN` `POST` |
 | `team_name` | Your team's name (eg. "Seahawks"). Note this does not include the city name. | `PRE` `IN` `POST` `BYE` |
@@ -57,9 +60,9 @@ The attributes available will change based on the sensor's state, a small number
 
 ### Manually
 
-Clone or download this repository and copy the "nfl" directory to your "custom_components" directory in your config directory
+Clone or download this repository and copy the "mlb" directory to your "custom_components" directory in your config directory
 
-```<config directory>/custom_components/nfl/...```
+```<config directory>/custom_components/mlb/...```
   
 ### HACS
 
@@ -70,29 +73,29 @@ Clone or download this repository and copy the "nfl" directory to your "custom_c
   
 ## Configuration
 
-You'll need to know your team ID, which is a 2- or 3-letter acronym (eg. "SEA" for Seattle or "NE" for New England). You can find yours at https://espn.com/nfl in the top scores UI. 
+You'll need to know your team ID, which is a 2- or 3-letter acronym (eg. "DET" for Detroit or "KC" for Kansas City). You can find yours at https://espn.com/mlb in the top scores UI. 
 
 ### Via the "Configuration->Integrations" section of the Home Assistant UI
 
-Look for the integration labeled "NFL" and enter your team's acronym in the UI prompt. You can also enter a friendly name. If you keep the default, your sensor will be `sensor.nfl`, otherwise it will be `sensor.friendly_name_you_picked`. 
+Look for the integration labeled "MLB" and enter your team's acronym in the UI prompt. You can also enter a friendly name. If you keep the default, your sensor will be `sensor.mlb`, otherwise it will be `sensor.friendly_name_you_picked`. 
 
 ### Manually in your `configuration.yaml` file
 
 To create a sensor instance add the following configuration to your sensor definitions using the team_id found above:
 
 ```
-- platform: nfl
-  team_id: 'SEA'
+- platform: mlb
+  team_id: 'DET'
 ```
 
-After you restart Home Assistant then you should have a new sensor called `sensor.nfl` in your system.
+After you restart Home Assistant then you should have a new sensor called `sensor.mlb` in your system.
 
-You can overide the sensor default name (`sensor.nfl`) to one of your choosing by setting the `name` option:
+You can overide the sensor default name (`sensor.mlb`) to one of your choosing by setting the `name` option:
 
 ```
-- platform: nfl
-  team_id: 'SEA'
-  name: Seahawks
+- platform: mlb
+  team_id: 'Detroit'
+  name: Tigers
 ```
 
-Using the configuration example above the sensor will then be called "sensor.seahawks".
+Using the configuration example above the sensor will then be called "sensor.tigers".
