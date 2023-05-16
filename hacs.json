@@ -1,6 +1,6 @@
 {
     "name": "MLB",
     "domains": [ "sensor" ],
-    "homeassistant": "0.95.4",
+    "homeassistant": "2023.5.3",
     "iot_class": "Cloud Polling"
 }

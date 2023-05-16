@@ -1,7 +1,7 @@
 {
     "domain": "mlb",
     "name": "MLB",
-    "version": "0.1",
+    "version": "0.3",
     "documentation": "https://github.com/jazakrzewski/ha-mlb",
     "issue_tracker": "https://github.com/jazakrzewski/ha-mlb/issues",
     "dependencies": [],
